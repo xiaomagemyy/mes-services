@@ -1,0 +1,36 @@
+version: "1.0"
+services:
+  mes-basic-service:
+    container_name: mes-basic-service
+    image: mes-basic-service:latest
+    ports:
+      - "8088:8088"
+    restart: always
+
+  mes-order-service:
+    container_name: mes-order-service
+    image: mes-order-service:latest
+    ports:
+      - "8081:8081"
+    restart: always
+
+  mes-scada-service:
+    container_name: mes-scada-service
+    image: mes-scada-service:latest
+    ports:
+      - "8082:8082"
+    restart: always
+
+  mes-gateway-service:
+    container_name: mes-gateway-service
+    image: mes-gateway-service:latest
+    ports:
+      - "8090:8090"
+    restart: always
+
+  mes-oauth-service:
+    container_name: mes-oauth2-service
+    image: mes-oauth2-service:latest
+    ports:
+      - "5000:5000"
+    restart: always

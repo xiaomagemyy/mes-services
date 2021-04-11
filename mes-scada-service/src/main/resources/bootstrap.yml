@@ -1,0 +1,38 @@
+server:
+  port: 8082
+
+# nacos配置
+spring:
+  application:
+    name: mes-scada-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.21.132:8848 #Nacos作为配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEV_GROUP
+        namespace: 85afe200-853f-4a9c-b3da-22a13a600b28
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/mapper/**/*Mapper.xml
+  config-location:  classpath:/mybatis/config/mybatis-config.xml
+
+security:
+  oauth2:
+    resource:
+      id: mes-scada-service
+      user-info-uri: http://localhost:5000/oauth/current/get
+
+logging:
+  file:
+    name: /log/mes/${spring.application.name}-${server.port}.log
+  level:
+    root: info
+
+# swagger 相关配置
+swagger:
+  base:
+    package: com.unilever.hefei.mes.scada
+  title: MES
+  description: Unilever MES API

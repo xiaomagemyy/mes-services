@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unilever.hefei.mes.basic.dao.LineInfoMapper">
+  <resultMap id="BaseResultMap" type="com.unilever.hefei.mes.basic.model.LineInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="factory" jdbcType="VARCHAR" property="factory" />
+    <result column="workshop" jdbcType="VARCHAR" property="workshop" />
+    <result column="production_line_num" jdbcType="VARCHAR" property="productionLineNum" />
+    <result column="production_line_name" jdbcType="VARCHAR" property="productionLineName" />
+    <result column="am_picture_nd" jdbcType="VARCHAR" property="amPictureNd" />
+    <result column="am_picture_wd" jdbcType="VARCHAR" property="amPictureWd" />
+    <result column="am_proportion_wd" jdbcType="DOUBLE" property="amProportionWd" />
+    <result column="am_proportion_nd" jdbcType="DOUBLE" property="amProportionNd" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="makedate" jdbcType="DATE" property="makedate" />
+    <result column="maketime" jdbcType="TIME" property="maketime" />
+    <result column="updatedate" jdbcType="DATE" property="updatedate" />
+    <result column="updatetime" jdbcType="TIME" property="updatetime" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="abbreviation" jdbcType="VARCHAR" property="abbreviation" />
+    <result column="securitymap_img" jdbcType="VARCHAR" property="securitymapImg" />
+    <result column="eventmap_img" jdbcType="VARCHAR" property="eventmapImg" />
+    <result column="batch_num" jdbcType="VARCHAR" property="batchNum" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="pm_starttime" jdbcType="TIMESTAMP" property="pmStarttime" />
+    <result column="pm_time_count" jdbcType="INTEGER" property="pmTimeCount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, factory, workshop, production_line_num, production_line_name, am_picture_nd, 
+    am_picture_wd, am_proportion_wd, am_proportion_nd, remark, creater, updater, makedate, 
+    maketime, updatedate, updatetime, picture, abbreviation, securitymap_img, eventmap_img, 
+    batch_num, type, pm_starttime, pm_time_count
+  </sql>
+  <select id="selectByExample" parameterType="com.unilever.hefei.mes.basic.model.LineInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from msp_production_line_management
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from msp_production_line_management
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from msp_production_line_management
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unilever.hefei.mes.basic.model.LineInfoExample">
+    delete from msp_production_line_management
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unilever.hefei.mes.basic.model.LineInfo">
+    insert into msp_production_line_management (id, factory, workshop, 
+      production_line_num, production_line_name, 
+      am_picture_nd, am_picture_wd, am_proportion_wd, 
+      am_proportion_nd, remark, creater, 
+      updater, makedate, maketime, 
+      updatedate, updatetime, picture, 
+      abbreviation, securitymap_img, eventmap_img, 
+      batch_num, type, pm_starttime, 
+      pm_time_count)
+    values (#{id,jdbcType=INTEGER}, #{factory,jdbcType=VARCHAR}, #{workshop,jdbcType=VARCHAR}, 
+      #{productionLineNum,jdbcType=VARCHAR}, #{productionLineName,jdbcType=VARCHAR}, 
+      #{amPictureNd,jdbcType=VARCHAR}, #{amPictureWd,jdbcType=VARCHAR}, #{amProportionWd,jdbcType=DOUBLE}, 
+      #{amProportionNd,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{makedate,jdbcType=DATE}, #{maketime,jdbcType=TIME}, 
+      #{updatedate,jdbcType=DATE}, #{updatetime,jdbcType=TIME}, #{picture,jdbcType=VARCHAR}, 
+      #{abbreviation,jdbcType=VARCHAR}, #{securitymapImg,jdbcType=VARCHAR}, #{eventmapImg,jdbcType=VARCHAR}, 
+      #{batchNum,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{pmStarttime,jdbcType=TIMESTAMP}, 
+      #{pmTimeCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unilever.hefei.mes.basic.model.LineInfo">
+    insert into msp_production_line_management
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="factory != null">
+        factory,
+      </if>
+      <if test="workshop != null">
+        workshop,
+      </if>
+      <if test="productionLineNum != null">
+        production_line_num,
+      </if>
+      <if test="productionLineName != null">
+        production_line_name,
+      </if>
+      <if test="amPictureNd != null">
+        am_picture_nd,
+      </if>
+      <if test="amPictureWd != null">
+        am_picture_wd,
+      </if>
+      <if test="amProportionWd != null">
+        am_proportion_wd,
+      </if>
+      <if test="amProportionNd != null">
+        am_proportion_nd,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="makedate != null">
+        makedate,
+      </if>
+      <if test="maketime != null">
+        maketime,
+      </if>
+      <if test="updatedate != null">
+        updatedate,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="abbreviation != null">
+        abbreviation,
+      </if>
+      <if test="securitymapImg != null">
+        securitymap_img,
+      </if>
+      <if test="eventmapImg != null">
+        eventmap_img,
+      </if>
+      <if test="batchNum != null">
+        batch_num,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="pmStarttime != null">
+        pm_starttime,
+      </if>
+      <if test="pmTimeCount != null">
+        pm_time_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="factory != null">
+        #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="workshop != null">
+        #{workshop,jdbcType=VARCHAR},
+      </if>
+      <if test="productionLineNum != null">
+        #{productionLineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="productionLineName != null">
+        #{productionLineName,jdbcType=VARCHAR},
+      </if>
+      <if test="amPictureNd != null">
+        #{amPictureNd,jdbcType=VARCHAR},
+      </if>
+      <if test="amPictureWd != null">
+        #{amPictureWd,jdbcType=VARCHAR},
+      </if>
+      <if test="amProportionWd != null">
+        #{amProportionWd,jdbcType=DOUBLE},
+      </if>
+      <if test="amProportionNd != null">
+        #{amProportionNd,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="makedate != null">
+        #{makedate,jdbcType=DATE},
+      </if>
+      <if test="maketime != null">
+        #{maketime,jdbcType=TIME},
+      </if>
+      <if test="updatedate != null">
+        #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIME},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="abbreviation != null">
+        #{abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="securitymapImg != null">
+        #{securitymapImg,jdbcType=VARCHAR},
+      </if>
+      <if test="eventmapImg != null">
+        #{eventmapImg,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNum != null">
+        #{batchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="pmStarttime != null">
+        #{pmStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pmTimeCount != null">
+        #{pmTimeCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unilever.hefei.mes.basic.model.LineInfoExample" resultType="java.lang.Long">
+    select count(*) from msp_production_line_management
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update msp_production_line_management
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.factory != null">
+        factory = #{record.factory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workshop != null">
+        workshop = #{record.workshop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productionLineNum != null">
+        production_line_num = #{record.productionLineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productionLineName != null">
+        production_line_name = #{record.productionLineName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amPictureNd != null">
+        am_picture_nd = #{record.amPictureNd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amPictureWd != null">
+        am_picture_wd = #{record.amPictureWd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amProportionWd != null">
+        am_proportion_wd = #{record.amProportionWd,jdbcType=DOUBLE},
+      </if>
+      <if test="record.amProportionNd != null">
+        am_proportion_nd = #{record.amProportionNd,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null">
+        creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.makedate != null">
+        makedate = #{record.makedate,jdbcType=DATE},
+      </if>
+      <if test="record.maketime != null">
+        maketime = #{record.maketime,jdbcType=TIME},
+      </if>
+      <if test="record.updatedate != null">
+        updatedate = #{record.updatedate,jdbcType=DATE},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=TIME},
+      </if>
+      <if test="record.picture != null">
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abbreviation != null">
+        abbreviation = #{record.abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.securitymapImg != null">
+        securitymap_img = #{record.securitymapImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventmapImg != null">
+        eventmap_img = #{record.eventmapImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchNum != null">
+        batch_num = #{record.batchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmStarttime != null">
+        pm_starttime = #{record.pmStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pmTimeCount != null">
+        pm_time_count = #{record.pmTimeCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update msp_production_line_management
+    set id = #{record.id,jdbcType=INTEGER},
+      factory = #{record.factory,jdbcType=VARCHAR},
+      workshop = #{record.workshop,jdbcType=VARCHAR},
+      production_line_num = #{record.productionLineNum,jdbcType=VARCHAR},
+      production_line_name = #{record.productionLineName,jdbcType=VARCHAR},
+      am_picture_nd = #{record.amPictureNd,jdbcType=VARCHAR},
+      am_picture_wd = #{record.amPictureWd,jdbcType=VARCHAR},
+      am_proportion_wd = #{record.amProportionWd,jdbcType=DOUBLE},
+      am_proportion_nd = #{record.amProportionNd,jdbcType=DOUBLE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      updater = #{record.updater,jdbcType=VARCHAR},
+      makedate = #{record.makedate,jdbcType=DATE},
+      maketime = #{record.maketime,jdbcType=TIME},
+      updatedate = #{record.updatedate,jdbcType=DATE},
+      updatetime = #{record.updatetime,jdbcType=TIME},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      abbreviation = #{record.abbreviation,jdbcType=VARCHAR},
+      securitymap_img = #{record.securitymapImg,jdbcType=VARCHAR},
+      eventmap_img = #{record.eventmapImg,jdbcType=VARCHAR},
+      batch_num = #{record.batchNum,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      pm_starttime = #{record.pmStarttime,jdbcType=TIMESTAMP},
+      pm_time_count = #{record.pmTimeCount,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unilever.hefei.mes.basic.model.LineInfo">
+    update msp_production_line_management
+    <set>
+      <if test="factory != null">
+        factory = #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="workshop != null">
+        workshop = #{workshop,jdbcType=VARCHAR},
+      </if>
+      <if test="productionLineNum != null">
+        production_line_num = #{productionLineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="productionLineName != null">
+        production_line_name = #{productionLineName,jdbcType=VARCHAR},
+      </if>
+      <if test="amPictureNd != null">
+        am_picture_nd = #{amPictureNd,jdbcType=VARCHAR},
+      </if>
+      <if test="amPictureWd != null">
+        am_picture_wd = #{amPictureWd,jdbcType=VARCHAR},
+      </if>
+      <if test="amProportionWd != null">
+        am_proportion_wd = #{amProportionWd,jdbcType=DOUBLE},
+      </if>
+      <if test="amProportionNd != null">
+        am_proportion_nd = #{amProportionNd,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="makedate != null">
+        makedate = #{makedate,jdbcType=DATE},
+      </if>
+      <if test="maketime != null">
+        maketime = #{maketime,jdbcType=TIME},
+      </if>
+      <if test="updatedate != null">
+        updatedate = #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIME},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="abbreviation != null">
+        abbreviation = #{abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="securitymapImg != null">
+        securitymap_img = #{securitymapImg,jdbcType=VARCHAR},
+      </if>
+      <if test="eventmapImg != null">
+        eventmap_img = #{eventmapImg,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNum != null">
+        batch_num = #{batchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="pmStarttime != null">
+        pm_starttime = #{pmStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pmTimeCount != null">
+        pm_time_count = #{pmTimeCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unilever.hefei.mes.basic.model.LineInfo">
+    update msp_production_line_management
+    set factory = #{factory,jdbcType=VARCHAR},
+      workshop = #{workshop,jdbcType=VARCHAR},
+      production_line_num = #{productionLineNum,jdbcType=VARCHAR},
+      production_line_name = #{productionLineName,jdbcType=VARCHAR},
+      am_picture_nd = #{amPictureNd,jdbcType=VARCHAR},
+      am_picture_wd = #{amPictureWd,jdbcType=VARCHAR},
+      am_proportion_wd = #{amProportionWd,jdbcType=DOUBLE},
+      am_proportion_nd = #{amProportionNd,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      makedate = #{makedate,jdbcType=DATE},
+      maketime = #{maketime,jdbcType=TIME},
+      updatedate = #{updatedate,jdbcType=DATE},
+      updatetime = #{updatetime,jdbcType=TIME},
+      picture = #{picture,jdbcType=VARCHAR},
+      abbreviation = #{abbreviation,jdbcType=VARCHAR},
+      securitymap_img = #{securitymapImg,jdbcType=VARCHAR},
+      eventmap_img = #{eventmapImg,jdbcType=VARCHAR},
+      batch_num = #{batchNum,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      pm_starttime = #{pmStarttime,jdbcType=TIMESTAMP},
+      pm_time_count = #{pmTimeCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,59 @@
+server:
+  port: 5000
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: mes-oauth-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.21.132:8848 #Nacos服务注册中心地址
+        namespace: 85afe200-853f-4a9c-b3da-22a13a600b28
+        group: DEV_GROUP
+        enabled: true
+      config:
+        server-addr: 192.168.21.132:8848 #Nacos作为配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEV_GROUP
+        namespace: 85afe200-853f-4a9c-b3da-22a13a600b28
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.21.132:3306/unilever_oauth?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    hikari:
+      test-on-borrow: false
+      test-while-idle: true
+      test-on-return: false
+      validation-query: SELECT 1
+  redis:
+    database: 0
+    host: 192.168.21.132
+    port: 6379
+    password: test@132
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        min-idle: 1
+    timeout: 100000
+
+management:
+  endpoint:
+    health:
+      enabled: true
+
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/mapper/**/*Mapper.xml
+  config-location:  classpath:/mybatis/config/mybatis-config.xml
+
+logging:
+  file:
+    name: /log/mes/${spring.application.name}-${server.port}.log
+  level:
+    root: info

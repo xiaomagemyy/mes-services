@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+ 
+<!-- 在项目根目录下(pom.xml同级)打开命令行工具：mvn mybatis-generator:generate -->  
+<generatorConfiguration>
+
+	<properties resource="mybatis/generatorConfig.properties" />
+	
+	<!-- 配置成你本地的mysql-connector-java jar -->
+	<classPathEntry
+		location="${mybatis.generator.classPathEntry.location}" />
+  
+    <context id="saas_admin" targetRuntime="MyBatis3">
+		<!-- 生成的Java文件的编码-->
+		<property name="javaFileEncoding" value="UTF-8"/>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+          
+        <!-- 数据库连接信息 -->
+        <jdbcConnection driverClass="${mybatis.generator.jdbcConnection.driverClass}"
+            connectionURL="${mybatis.generator.jdbcConnection.connectionURL}"
+            userId="${mybatis.generator.jdbcConnection.userId}"
+            password="${mybatis.generator.jdbcConnection.password}">
+        </jdbcConnection>
+
+		<!-- java类型处理器 -->
+        <javaTypeResolver>
+			<!--
+			true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+			false：默认,
+				scale>0;length>18：使用BigDecimal;
+				scale=0;length[10,18]：使用Long；
+				scale=0;length[5,9]：使用Integer；
+				scale=0;length<5：使用Short；
+			-->
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+  
+        <!-- 生成model -->
+        <javaModelGenerator targetPackage="${mybatis.generator.javaModelGenerator.targetPackage}"
+            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+          
+        <!-- 生成Mapper映射 -->
+        <sqlMapGenerator targetPackage="${mybatis.generator.sqlMapGenerator.targetPackage}"
+            targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+  
+        <!-- 生成DAO接口 -->
+        <javaClientGenerator type="XMLMAPPER"
+            targetPackage="${mybatis.generator.javaClientGenerator.targetPackage}" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+  
+        <!-- 表 -->
+<!--        <table tableName="tb_alarm" domainObjectName="TbAlarm" />-->
+<!--        <table tableName="tb_rtpara" domainObjectName="TbRtpara" />-->
+        <table tableName="unilever_user" domainObjectName="User" />
+<!--        <table tableName="oauth_code" domainObjectName="OauthCode"/>-->
+    </context>  
+</generatorConfiguration>  

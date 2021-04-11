@@ -1,0 +1,26 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: mes-gateway-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.21.132:8848
+        file-extension: yaml
+        group: DEV_GROUP
+        namespace: 85afe200-853f-4a9c-b3da-22a13a600b28
+  redis:
+    database: 0
+    host: 192.168.21.132
+    port: 6379
+    password: test@132
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        min-idle: 1
+    timeout: 100000
+

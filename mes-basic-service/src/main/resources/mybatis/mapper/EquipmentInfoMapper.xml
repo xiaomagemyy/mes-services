@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unilever.hefei.mes.basic.dao.EquipmentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.unilever.hefei.mes.basic.model.EquipmentInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="production_line_management_id" jdbcType="INTEGER" property="productionLineManagementId" />
+    <result column="inner_outer" jdbcType="VARCHAR" property="innerOuter" />
+    <result column="equipment_number" jdbcType="VARCHAR" property="equipmentNumber" />
+    <result column="equipment_name" jdbcType="VARCHAR" property="equipmentName" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="fixed_asset_number" jdbcType="VARCHAR" property="fixedAssetNumber" />
+    <result column="working_procedure" jdbcType="VARCHAR" property="workingProcedure" />
+    <result column="equipment_director" jdbcType="VARCHAR" property="equipmentDirector" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="rated_power" jdbcType="VARCHAR" property="ratedPower" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="factory_number" jdbcType="VARCHAR" property="factoryNumber" />
+    <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+    <result column="factory_linkman" jdbcType="VARCHAR" property="factoryLinkman" />
+    <result column="factory_linkman_phone_number" jdbcType="VARCHAR" property="factoryLinkmanPhoneNumber" />
+    <result column="factory_linkman_mail" jdbcType="VARCHAR" property="factoryLinkmanMail" />
+    <result column="location_of_installation" jdbcType="VARCHAR" property="locationOfInstallation" />
+    <result column="date_of_production" jdbcType="VARCHAR" property="dateOfProduction" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="makedate" jdbcType="DATE" property="makedate" />
+    <result column="maketime" jdbcType="TIME" property="maketime" />
+    <result column="updatedate" jdbcType="DATE" property="updatedate" />
+    <result column="updatetime" jdbcType="TIME" property="updatetime" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="pm_spot_x" jdbcType="INTEGER" property="pmSpotX" />
+    <result column="pm_spot_y" jdbcType="INTEGER" property="pmSpotY" />
+    <result column="pm_title" jdbcType="VARCHAR" property="pmTitle" />
+    <result column="am_spot_x" jdbcType="INTEGER" property="amSpotX" />
+    <result column="am_spot_y" jdbcType="INTEGER" property="amSpotY" />
+    <result column="am_title" jdbcType="VARCHAR" property="amTitle" />
+    <result column="equipment_value" jdbcType="DOUBLE" property="equipmentValue" />
+    <result column="buy_date" jdbcType="TIMESTAMP" property="buyDate" />
+    <result column="design_period" jdbcType="INTEGER" property="designPeriod" />
+    <result column="end_value" jdbcType="DOUBLE" property="endValue" />
+    <result column="equipment_type" jdbcType="VARCHAR" property="equipmentType" />
+    <result column="enable_oee" jdbcType="INTEGER" property="enableOee" />
+    <result column="enable_electric" jdbcType="INTEGER" property="enableElectric" />
+    <result column="enable_gas" jdbcType="INTEGER" property="enableGas" />
+    <result column="equipment_order" jdbcType="INTEGER" property="equipmentOrder" />
+    <result column="pm_used" jdbcType="VARCHAR" property="pmUsed" />
+    <result column="bottle_loss_order" jdbcType="INTEGER" property="bottleLossOrder" />
+    <result column="cover_loss_order" jdbcType="INTEGER" property="coverLossOrder" />
+    <result column="box_loss_order" jdbcType="INTEGER" property="boxLossOrder" />
+    <result column="loss_unit" jdbcType="VARCHAR" property="lossUnit" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, production_line_management_id, inner_outer, equipment_number, equipment_name, 
+    code, model, fixed_asset_number, working_procedure, equipment_director, phone_number, 
+    rated_power, unit, factory_number, factory_name, factory_linkman, factory_linkman_phone_number, 
+    factory_linkman_mail, location_of_installation, date_of_production, remark, creater, 
+    updater, makedate, maketime, updatedate, updatetime, picture, pm_spot_x, pm_spot_y, 
+    pm_title, am_spot_x, am_spot_y, am_title, equipment_value, buy_date, design_period, 
+    end_value, equipment_type, enable_oee, enable_electric, enable_gas, equipment_order, 
+    pm_used, bottle_loss_order, cover_loss_order, box_loss_order, loss_unit
+  </sql>
+  <select id="selectByExample" parameterType="com.unilever.hefei.mes.basic.model.EquipmentInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from msp_equipment_management_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from msp_equipment_management_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from msp_equipment_management_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unilever.hefei.mes.basic.model.EquipmentInfoExample">
+    delete from msp_equipment_management_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unilever.hefei.mes.basic.model.EquipmentInfo">
+    insert into msp_equipment_management_detail (id, production_line_management_id, inner_outer, 
+      equipment_number, equipment_name, code, 
+      model, fixed_asset_number, working_procedure, 
+      equipment_director, phone_number, rated_power, 
+      unit, factory_number, factory_name, 
+      factory_linkman, factory_linkman_phone_number, 
+      factory_linkman_mail, location_of_installation, 
+      date_of_production, remark, creater, 
+      updater, makedate, maketime, 
+      updatedate, updatetime, picture, 
+      pm_spot_x, pm_spot_y, pm_title, 
+      am_spot_x, am_spot_y, am_title, 
+      equipment_value, buy_date, design_period, 
+      end_value, equipment_type, enable_oee, 
+      enable_electric, enable_gas, equipment_order, 
+      pm_used, bottle_loss_order, cover_loss_order, 
+      box_loss_order, loss_unit)
+    values (#{id,jdbcType=INTEGER}, #{productionLineManagementId,jdbcType=INTEGER}, #{innerOuter,jdbcType=VARCHAR}, 
+      #{equipmentNumber,jdbcType=VARCHAR}, #{equipmentName,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{fixedAssetNumber,jdbcType=VARCHAR}, #{workingProcedure,jdbcType=VARCHAR}, 
+      #{equipmentDirector,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{ratedPower,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{factoryNumber,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR}, 
+      #{factoryLinkman,jdbcType=VARCHAR}, #{factoryLinkmanPhoneNumber,jdbcType=VARCHAR}, 
+      #{factoryLinkmanMail,jdbcType=VARCHAR}, #{locationOfInstallation,jdbcType=VARCHAR}, 
+      #{dateOfProduction,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{makedate,jdbcType=DATE}, #{maketime,jdbcType=TIME}, 
+      #{updatedate,jdbcType=DATE}, #{updatetime,jdbcType=TIME}, #{picture,jdbcType=VARCHAR}, 
+      #{pmSpotX,jdbcType=INTEGER}, #{pmSpotY,jdbcType=INTEGER}, #{pmTitle,jdbcType=VARCHAR}, 
+      #{amSpotX,jdbcType=INTEGER}, #{amSpotY,jdbcType=INTEGER}, #{amTitle,jdbcType=VARCHAR}, 
+      #{equipmentValue,jdbcType=DOUBLE}, #{buyDate,jdbcType=TIMESTAMP}, #{designPeriod,jdbcType=INTEGER}, 
+      #{endValue,jdbcType=DOUBLE}, #{equipmentType,jdbcType=VARCHAR}, #{enableOee,jdbcType=INTEGER}, 
+      #{enableElectric,jdbcType=INTEGER}, #{enableGas,jdbcType=INTEGER}, #{equipmentOrder,jdbcType=INTEGER}, 
+      #{pmUsed,jdbcType=VARCHAR}, #{bottleLossOrder,jdbcType=INTEGER}, #{coverLossOrder,jdbcType=INTEGER}, 
+      #{boxLossOrder,jdbcType=INTEGER}, #{lossUnit,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unilever.hefei.mes.basic.model.EquipmentInfo">
+    insert into msp_equipment_management_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productionLineManagementId != null">
+        production_line_management_id,
+      </if>
+      <if test="innerOuter != null">
+        inner_outer,
+      </if>
+      <if test="equipmentNumber != null">
+        equipment_number,
+      </if>
+      <if test="equipmentName != null">
+        equipment_name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="fixedAssetNumber != null">
+        fixed_asset_number,
+      </if>
+      <if test="workingProcedure != null">
+        working_procedure,
+      </if>
+      <if test="equipmentDirector != null">
+        equipment_director,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="ratedPower != null">
+        rated_power,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="factoryNumber != null">
+        factory_number,
+      </if>
+      <if test="factoryName != null">
+        factory_name,
+      </if>
+      <if test="factoryLinkman != null">
+        factory_linkman,
+      </if>
+      <if test="factoryLinkmanPhoneNumber != null">
+        factory_linkman_phone_number,
+      </if>
+      <if test="factoryLinkmanMail != null">
+        factory_linkman_mail,
+      </if>
+      <if test="locationOfInstallation != null">
+        location_of_installation,
+      </if>
+      <if test="dateOfProduction != null">
+        date_of_production,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="makedate != null">
+        makedate,
+      </if>
+      <if test="maketime != null">
+        maketime,
+      </if>
+      <if test="updatedate != null">
+        updatedate,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="pmSpotX != null">
+        pm_spot_x,
+      </if>
+      <if test="pmSpotY != null">
+        pm_spot_y,
+      </if>
+      <if test="pmTitle != null">
+        pm_title,
+      </if>
+      <if test="amSpotX != null">
+        am_spot_x,
+      </if>
+      <if test="amSpotY != null">
+        am_spot_y,
+      </if>
+      <if test="amTitle != null">
+        am_title,
+      </if>
+      <if test="equipmentValue != null">
+        equipment_value,
+      </if>
+      <if test="buyDate != null">
+        buy_date,
+      </if>
+      <if test="designPeriod != null">
+        design_period,
+      </if>
+      <if test="endValue != null">
+        end_value,
+      </if>
+      <if test="equipmentType != null">
+        equipment_type,
+      </if>
+      <if test="enableOee != null">
+        enable_oee,
+      </if>
+      <if test="enableElectric != null">
+        enable_electric,
+      </if>
+      <if test="enableGas != null">
+        enable_gas,
+      </if>
+      <if test="equipmentOrder != null">
+        equipment_order,
+      </if>
+      <if test="pmUsed != null">
+        pm_used,
+      </if>
+      <if test="bottleLossOrder != null">
+        bottle_loss_order,
+      </if>
+      <if test="coverLossOrder != null">
+        cover_loss_order,
+      </if>
+      <if test="boxLossOrder != null">
+        box_loss_order,
+      </if>
+      <if test="lossUnit != null">
+        loss_unit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productionLineManagementId != null">
+        #{productionLineManagementId,jdbcType=INTEGER},
+      </if>
+      <if test="innerOuter != null">
+        #{innerOuter,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentNumber != null">
+        #{equipmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentName != null">
+        #{equipmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedAssetNumber != null">
+        #{fixedAssetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="workingProcedure != null">
+        #{workingProcedure,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentDirector != null">
+        #{equipmentDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="ratedPower != null">
+        #{ratedPower,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryNumber != null">
+        #{factoryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null">
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryLinkman != null">
+        #{factoryLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryLinkmanPhoneNumber != null">
+        #{factoryLinkmanPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryLinkmanMail != null">
+        #{factoryLinkmanMail,jdbcType=VARCHAR},
+      </if>
+      <if test="locationOfInstallation != null">
+        #{locationOfInstallation,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfProduction != null">
+        #{dateOfProduction,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="makedate != null">
+        #{makedate,jdbcType=DATE},
+      </if>
+      <if test="maketime != null">
+        #{maketime,jdbcType=TIME},
+      </if>
+      <if test="updatedate != null">
+        #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIME},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="pmSpotX != null">
+        #{pmSpotX,jdbcType=INTEGER},
+      </if>
+      <if test="pmSpotY != null">
+        #{pmSpotY,jdbcType=INTEGER},
+      </if>
+      <if test="pmTitle != null">
+        #{pmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="amSpotX != null">
+        #{amSpotX,jdbcType=INTEGER},
+      </if>
+      <if test="amSpotY != null">
+        #{amSpotY,jdbcType=INTEGER},
+      </if>
+      <if test="amTitle != null">
+        #{amTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentValue != null">
+        #{equipmentValue,jdbcType=DOUBLE},
+      </if>
+      <if test="buyDate != null">
+        #{buyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="designPeriod != null">
+        #{designPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="endValue != null">
+        #{endValue,jdbcType=DOUBLE},
+      </if>
+      <if test="equipmentType != null">
+        #{equipmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="enableOee != null">
+        #{enableOee,jdbcType=INTEGER},
+      </if>
+      <if test="enableElectric != null">
+        #{enableElectric,jdbcType=INTEGER},
+      </if>
+      <if test="enableGas != null">
+        #{enableGas,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentOrder != null">
+        #{equipmentOrder,jdbcType=INTEGER},
+      </if>
+      <if test="pmUsed != null">
+        #{pmUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="bottleLossOrder != null">
+        #{bottleLossOrder,jdbcType=INTEGER},
+      </if>
+      <if test="coverLossOrder != null">
+        #{coverLossOrder,jdbcType=INTEGER},
+      </if>
+      <if test="boxLossOrder != null">
+        #{boxLossOrder,jdbcType=INTEGER},
+      </if>
+      <if test="lossUnit != null">
+        #{lossUnit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unilever.hefei.mes.basic.model.EquipmentInfoExample" resultType="java.lang.Long">
+    select count(*) from msp_equipment_management_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update msp_equipment_management_detail
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.productionLineManagementId != null">
+        production_line_management_id = #{record.productionLineManagementId,jdbcType=INTEGER},
+      </if>
+      <if test="record.innerOuter != null">
+        inner_outer = #{record.innerOuter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipmentNumber != null">
+        equipment_number = #{record.equipmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipmentName != null">
+        equipment_name = #{record.equipmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fixedAssetNumber != null">
+        fixed_asset_number = #{record.fixedAssetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workingProcedure != null">
+        working_procedure = #{record.workingProcedure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipmentDirector != null">
+        equipment_director = #{record.equipmentDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNumber != null">
+        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ratedPower != null">
+        rated_power = #{record.ratedPower,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factoryNumber != null">
+        factory_number = #{record.factoryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factoryName != null">
+        factory_name = #{record.factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factoryLinkman != null">
+        factory_linkman = #{record.factoryLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factoryLinkmanPhoneNumber != null">
+        factory_linkman_phone_number = #{record.factoryLinkmanPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factoryLinkmanMail != null">
+        factory_linkman_mail = #{record.factoryLinkmanMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationOfInstallation != null">
+        location_of_installation = #{record.locationOfInstallation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateOfProduction != null">
+        date_of_production = #{record.dateOfProduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null">
+        creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.makedate != null">
+        makedate = #{record.makedate,jdbcType=DATE},
+      </if>
+      <if test="record.maketime != null">
+        maketime = #{record.maketime,jdbcType=TIME},
+      </if>
+      <if test="record.updatedate != null">
+        updatedate = #{record.updatedate,jdbcType=DATE},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=TIME},
+      </if>
+      <if test="record.picture != null">
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmSpotX != null">
+        pm_spot_x = #{record.pmSpotX,jdbcType=INTEGER},
+      </if>
+      <if test="record.pmSpotY != null">
+        pm_spot_y = #{record.pmSpotY,jdbcType=INTEGER},
+      </if>
+      <if test="record.pmTitle != null">
+        pm_title = #{record.pmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amSpotX != null">
+        am_spot_x = #{record.amSpotX,jdbcType=INTEGER},
+      </if>
+      <if test="record.amSpotY != null">
+        am_spot_y = #{record.amSpotY,jdbcType=INTEGER},
+      </if>
+      <if test="record.amTitle != null">
+        am_title = #{record.amTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipmentValue != null">
+        equipment_value = #{record.equipmentValue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.buyDate != null">
+        buy_date = #{record.buyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.designPeriod != null">
+        design_period = #{record.designPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="record.endValue != null">
+        end_value = #{record.endValue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.equipmentType != null">
+        equipment_type = #{record.equipmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enableOee != null">
+        enable_oee = #{record.enableOee,jdbcType=INTEGER},
+      </if>
+      <if test="record.enableElectric != null">
+        enable_electric = #{record.enableElectric,jdbcType=INTEGER},
+      </if>
+      <if test="record.enableGas != null">
+        enable_gas = #{record.enableGas,jdbcType=INTEGER},
+      </if>
+      <if test="record.equipmentOrder != null">
+        equipment_order = #{record.equipmentOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.pmUsed != null">
+        pm_used = #{record.pmUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bottleLossOrder != null">
+        bottle_loss_order = #{record.bottleLossOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.coverLossOrder != null">
+        cover_loss_order = #{record.coverLossOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.boxLossOrder != null">
+        box_loss_order = #{record.boxLossOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.lossUnit != null">
+        loss_unit = #{record.lossUnit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update msp_equipment_management_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      production_line_management_id = #{record.productionLineManagementId,jdbcType=INTEGER},
+      inner_outer = #{record.innerOuter,jdbcType=VARCHAR},
+      equipment_number = #{record.equipmentNumber,jdbcType=VARCHAR},
+      equipment_name = #{record.equipmentName,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      fixed_asset_number = #{record.fixedAssetNumber,jdbcType=VARCHAR},
+      working_procedure = #{record.workingProcedure,jdbcType=VARCHAR},
+      equipment_director = #{record.equipmentDirector,jdbcType=VARCHAR},
+      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      rated_power = #{record.ratedPower,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      factory_number = #{record.factoryNumber,jdbcType=VARCHAR},
+      factory_name = #{record.factoryName,jdbcType=VARCHAR},
+      factory_linkman = #{record.factoryLinkman,jdbcType=VARCHAR},
+      factory_linkman_phone_number = #{record.factoryLinkmanPhoneNumber,jdbcType=VARCHAR},
+      factory_linkman_mail = #{record.factoryLinkmanMail,jdbcType=VARCHAR},
+      location_of_installation = #{record.locationOfInstallation,jdbcType=VARCHAR},
+      date_of_production = #{record.dateOfProduction,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      updater = #{record.updater,jdbcType=VARCHAR},
+      makedate = #{record.makedate,jdbcType=DATE},
+      maketime = #{record.maketime,jdbcType=TIME},
+      updatedate = #{record.updatedate,jdbcType=DATE},
+      updatetime = #{record.updatetime,jdbcType=TIME},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      pm_spot_x = #{record.pmSpotX,jdbcType=INTEGER},
+      pm_spot_y = #{record.pmSpotY,jdbcType=INTEGER},
+      pm_title = #{record.pmTitle,jdbcType=VARCHAR},
+      am_spot_x = #{record.amSpotX,jdbcType=INTEGER},
+      am_spot_y = #{record.amSpotY,jdbcType=INTEGER},
+      am_title = #{record.amTitle,jdbcType=VARCHAR},
+      equipment_value = #{record.equipmentValue,jdbcType=DOUBLE},
+      buy_date = #{record.buyDate,jdbcType=TIMESTAMP},
+      design_period = #{record.designPeriod,jdbcType=INTEGER},
+      end_value = #{record.endValue,jdbcType=DOUBLE},
+      equipment_type = #{record.equipmentType,jdbcType=VARCHAR},
+      enable_oee = #{record.enableOee,jdbcType=INTEGER},
+      enable_electric = #{record.enableElectric,jdbcType=INTEGER},
+      enable_gas = #{record.enableGas,jdbcType=INTEGER},
+      equipment_order = #{record.equipmentOrder,jdbcType=INTEGER},
+      pm_used = #{record.pmUsed,jdbcType=VARCHAR},
+      bottle_loss_order = #{record.bottleLossOrder,jdbcType=INTEGER},
+      cover_loss_order = #{record.coverLossOrder,jdbcType=INTEGER},
+      box_loss_order = #{record.boxLossOrder,jdbcType=INTEGER},
+      loss_unit = #{record.lossUnit,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unilever.hefei.mes.basic.model.EquipmentInfo">
+    update msp_equipment_management_detail
+    <set>
+      <if test="productionLineManagementId != null">
+        production_line_management_id = #{productionLineManagementId,jdbcType=INTEGER},
+      </if>
+      <if test="innerOuter != null">
+        inner_outer = #{innerOuter,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentNumber != null">
+        equipment_number = #{equipmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentName != null">
+        equipment_name = #{equipmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedAssetNumber != null">
+        fixed_asset_number = #{fixedAssetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="workingProcedure != null">
+        working_procedure = #{workingProcedure,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentDirector != null">
+        equipment_director = #{equipmentDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="ratedPower != null">
+        rated_power = #{ratedPower,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryNumber != null">
+        factory_number = #{factoryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null">
+        factory_name = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryLinkman != null">
+        factory_linkman = #{factoryLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryLinkmanPhoneNumber != null">
+        factory_linkman_phone_number = #{factoryLinkmanPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryLinkmanMail != null">
+        factory_linkman_mail = #{factoryLinkmanMail,jdbcType=VARCHAR},
+      </if>
+      <if test="locationOfInstallation != null">
+        location_of_installation = #{locationOfInstallation,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfProduction != null">
+        date_of_production = #{dateOfProduction,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="makedate != null">
+        makedate = #{makedate,jdbcType=DATE},
+      </if>
+      <if test="maketime != null">
+        maketime = #{maketime,jdbcType=TIME},
+      </if>
+      <if test="updatedate != null">
+        updatedate = #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIME},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="pmSpotX != null">
+        pm_spot_x = #{pmSpotX,jdbcType=INTEGER},
+      </if>
+      <if test="pmSpotY != null">
+        pm_spot_y = #{pmSpotY,jdbcType=INTEGER},
+      </if>
+      <if test="pmTitle != null">
+        pm_title = #{pmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="amSpotX != null">
+        am_spot_x = #{amSpotX,jdbcType=INTEGER},
+      </if>
+      <if test="amSpotY != null">
+        am_spot_y = #{amSpotY,jdbcType=INTEGER},
+      </if>
+      <if test="amTitle != null">
+        am_title = #{amTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentValue != null">
+        equipment_value = #{equipmentValue,jdbcType=DOUBLE},
+      </if>
+      <if test="buyDate != null">
+        buy_date = #{buyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="designPeriod != null">
+        design_period = #{designPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="endValue != null">
+        end_value = #{endValue,jdbcType=DOUBLE},
+      </if>
+      <if test="equipmentType != null">
+        equipment_type = #{equipmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="enableOee != null">
+        enable_oee = #{enableOee,jdbcType=INTEGER},
+      </if>
+      <if test="enableElectric != null">
+        enable_electric = #{enableElectric,jdbcType=INTEGER},
+      </if>
+      <if test="enableGas != null">
+        enable_gas = #{enableGas,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentOrder != null">
+        equipment_order = #{equipmentOrder,jdbcType=INTEGER},
+      </if>
+      <if test="pmUsed != null">
+        pm_used = #{pmUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="bottleLossOrder != null">
+        bottle_loss_order = #{bottleLossOrder,jdbcType=INTEGER},
+      </if>
+      <if test="coverLossOrder != null">
+        cover_loss_order = #{coverLossOrder,jdbcType=INTEGER},
+      </if>
+      <if test="boxLossOrder != null">
+        box_loss_order = #{boxLossOrder,jdbcType=INTEGER},
+      </if>
+      <if test="lossUnit != null">
+        loss_unit = #{lossUnit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unilever.hefei.mes.basic.model.EquipmentInfo">
+    update msp_equipment_management_detail
+    set production_line_management_id = #{productionLineManagementId,jdbcType=INTEGER},
+      inner_outer = #{innerOuter,jdbcType=VARCHAR},
+      equipment_number = #{equipmentNumber,jdbcType=VARCHAR},
+      equipment_name = #{equipmentName,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      fixed_asset_number = #{fixedAssetNumber,jdbcType=VARCHAR},
+      working_procedure = #{workingProcedure,jdbcType=VARCHAR},
+      equipment_director = #{equipmentDirector,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      rated_power = #{ratedPower,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      factory_number = #{factoryNumber,jdbcType=VARCHAR},
+      factory_name = #{factoryName,jdbcType=VARCHAR},
+      factory_linkman = #{factoryLinkman,jdbcType=VARCHAR},
+      factory_linkman_phone_number = #{factoryLinkmanPhoneNumber,jdbcType=VARCHAR},
+      factory_linkman_mail = #{factoryLinkmanMail,jdbcType=VARCHAR},
+      location_of_installation = #{locationOfInstallation,jdbcType=VARCHAR},
+      date_of_production = #{dateOfProduction,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      makedate = #{makedate,jdbcType=DATE},
+      maketime = #{maketime,jdbcType=TIME},
+      updatedate = #{updatedate,jdbcType=DATE},
+      updatetime = #{updatetime,jdbcType=TIME},
+      picture = #{picture,jdbcType=VARCHAR},
+      pm_spot_x = #{pmSpotX,jdbcType=INTEGER},
+      pm_spot_y = #{pmSpotY,jdbcType=INTEGER},
+      pm_title = #{pmTitle,jdbcType=VARCHAR},
+      am_spot_x = #{amSpotX,jdbcType=INTEGER},
+      am_spot_y = #{amSpotY,jdbcType=INTEGER},
+      am_title = #{amTitle,jdbcType=VARCHAR},
+      equipment_value = #{equipmentValue,jdbcType=DOUBLE},
+      buy_date = #{buyDate,jdbcType=TIMESTAMP},
+      design_period = #{designPeriod,jdbcType=INTEGER},
+      end_value = #{endValue,jdbcType=DOUBLE},
+      equipment_type = #{equipmentType,jdbcType=VARCHAR},
+      enable_oee = #{enableOee,jdbcType=INTEGER},
+      enable_electric = #{enableElectric,jdbcType=INTEGER},
+      enable_gas = #{enableGas,jdbcType=INTEGER},
+      equipment_order = #{equipmentOrder,jdbcType=INTEGER},
+      pm_used = #{pmUsed,jdbcType=VARCHAR},
+      bottle_loss_order = #{bottleLossOrder,jdbcType=INTEGER},
+      cover_loss_order = #{coverLossOrder,jdbcType=INTEGER},
+      box_loss_order = #{boxLossOrder,jdbcType=INTEGER},
+      loss_unit = #{lossUnit,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unilever.hefei.mes.order.dao.MspDailyPlanMapper">
+  <resultMap id="BaseResultMap" type="com.unilever.hefei.mes.order.model.MspDailyPlan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="line_num" jdbcType="VARCHAR" property="lineNum" />
+    <result column="actual_produce_order" jdbcType="INTEGER" property="actualProduceOrder" />
+    <result column="auto_cleaning_status" jdbcType="VARCHAR" property="autoCleaningStatus" />
+    <result column="person_cleaning_status" jdbcType="VARCHAR" property="personCleaningStatus" />
+    <result column="auto_disinfection" jdbcType="VARCHAR" property="autoDisinfection" />
+    <result column="person_disinfection" jdbcType="VARCHAR" property="personDisinfection" />
+    <result column="team" jdbcType="VARCHAR" property="team" />
+    <result column="production_state" jdbcType="VARCHAR" property="productionState" />
+    <result column="plan_date" jdbcType="VARCHAR" property="planDate" />
+    <result column="production_class" jdbcType="VARCHAR" property="productionClass" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="plan_describe" jdbcType="VARCHAR" property="planDescribe" />
+    <result column="actual_num_box" jdbcType="VARCHAR" property="actualNumBox" />
+    <result column="plan_produce_start" jdbcType="TIMESTAMP" property="planProduceStart" />
+    <result column="plan_produce_end" jdbcType="TIMESTAMP" property="planProduceEnd" />
+    <result column="pot" jdbcType="VARCHAR" property="pot" />
+    <result column="material_num" jdbcType="VARCHAR" property="materialNum" />
+    <result column="material_describe" jdbcType="VARCHAR" property="materialDescribe" />
+    <result column="material_actual_num" jdbcType="VARCHAR" property="materialActualNum" />
+    <result column="plan_start" jdbcType="TIMESTAMP" property="planStart" />
+    <result column="plan_end" jdbcType="TIMESTAMP" property="planEnd" />
+    <result column="actual_start" jdbcType="TIMESTAMP" property="actualStart" />
+    <result column="actual_end" jdbcType="TIMESTAMP" property="actualEnd" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="makedate" jdbcType="DATE" property="makedate" />
+    <result column="maketime" jdbcType="TIME" property="maketime" />
+    <result column="updatedate" jdbcType="DATE" property="updatedate" />
+    <result column="updatetime" jdbcType="TIME" property="updatetime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="forced_start" jdbcType="INTEGER" property="forcedStart" />
+    <result column="forced_start_reason" jdbcType="VARCHAR" property="forcedStartReason" />
+    <result column="packaging_standard_id" jdbcType="INTEGER" property="packagingStandardId" />
+    <result column="version_num" jdbcType="VARCHAR" property="versionNum" />
+    <result column="filling_start" jdbcType="TIMESTAMP" property="fillingStart" />
+    <result column="filling_end" jdbcType="TIMESTAMP" property="fillingEnd" />
+    <result column="maduo_prodcount" jdbcType="INTEGER" property="maduoProdcount" />
+    <result column="cleaning_type" jdbcType="VARCHAR" property="cleaningType" />
+    <result column="need_clean_time" jdbcType="TIMESTAMP" property="needCleanTime" />
+    <result column="transfer_type" jdbcType="VARCHAR" property="transferType" />
+    <result column="calloff_timestamp" jdbcType="INTEGER" property="calloffTimestamp" />
+    <result column="inner_result" jdbcType="VARCHAR" property="innerResult" />
+    <result column="outer_result" jdbcType="VARCHAR" property="outerResult" />
+    <result column="first_tank" jdbcType="VARCHAR" property="firstTank" />
+    <result column="skip_order_chain" jdbcType="VARCHAR" property="skipOrderChain" />
+    <result column="outer_loss_operation" jdbcType="VARCHAR" property="outerLossOperation" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, line_num, actual_produce_order, auto_cleaning_status, person_cleaning_status, 
+    auto_disinfection, person_disinfection, team, production_state, plan_date, production_class, 
+    project_id, plan_describe, actual_num_box, plan_produce_start, plan_produce_end, 
+    pot, material_num, material_describe, material_actual_num, plan_start, plan_end, 
+    actual_start, actual_end, remarks, creater, updater, makedate, maketime, updatedate, 
+    updatetime, deleted, forced_start, forced_start_reason, packaging_standard_id, version_num, 
+    filling_start, filling_end, maduo_prodcount, cleaning_type, need_clean_time, transfer_type, 
+    calloff_timestamp, inner_result, outer_result, first_tank, skip_order_chain, outer_loss_operation
+  </sql>
+  <select id="selectByExample" parameterType="com.unilever.hefei.mes.order.model.MspDailyPlanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from msp_daily_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from msp_daily_plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from msp_daily_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unilever.hefei.mes.order.model.MspDailyPlanExample">
+    delete from msp_daily_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unilever.hefei.mes.order.model.MspDailyPlan">
+    insert into msp_daily_plan (id, name, line_num, 
+      actual_produce_order, auto_cleaning_status, 
+      person_cleaning_status, auto_disinfection, 
+      person_disinfection, team, production_state, 
+      plan_date, production_class, project_id, 
+      plan_describe, actual_num_box, plan_produce_start, 
+      plan_produce_end, pot, material_num, 
+      material_describe, material_actual_num, plan_start, 
+      plan_end, actual_start, actual_end, 
+      remarks, creater, updater, 
+      makedate, maketime, updatedate, 
+      updatetime, deleted, forced_start, 
+      forced_start_reason, packaging_standard_id, 
+      version_num, filling_start, filling_end, 
+      maduo_prodcount, cleaning_type, need_clean_time, 
+      transfer_type, calloff_timestamp, inner_result, 
+      outer_result, first_tank, skip_order_chain, 
+      outer_loss_operation)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{lineNum,jdbcType=VARCHAR}, 
+      #{actualProduceOrder,jdbcType=INTEGER}, #{autoCleaningStatus,jdbcType=VARCHAR}, 
+      #{personCleaningStatus,jdbcType=VARCHAR}, #{autoDisinfection,jdbcType=VARCHAR}, 
+      #{personDisinfection,jdbcType=VARCHAR}, #{team,jdbcType=VARCHAR}, #{productionState,jdbcType=VARCHAR}, 
+      #{planDate,jdbcType=VARCHAR}, #{productionClass,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, 
+      #{planDescribe,jdbcType=VARCHAR}, #{actualNumBox,jdbcType=VARCHAR}, #{planProduceStart,jdbcType=TIMESTAMP}, 
+      #{planProduceEnd,jdbcType=TIMESTAMP}, #{pot,jdbcType=VARCHAR}, #{materialNum,jdbcType=VARCHAR}, 
+      #{materialDescribe,jdbcType=VARCHAR}, #{materialActualNum,jdbcType=VARCHAR}, #{planStart,jdbcType=TIMESTAMP}, 
+      #{planEnd,jdbcType=TIMESTAMP}, #{actualStart,jdbcType=TIMESTAMP}, #{actualEnd,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
+      #{makedate,jdbcType=DATE}, #{maketime,jdbcType=TIME}, #{updatedate,jdbcType=DATE}, 
+      #{updatetime,jdbcType=TIME}, #{deleted,jdbcType=INTEGER}, #{forcedStart,jdbcType=INTEGER}, 
+      #{forcedStartReason,jdbcType=VARCHAR}, #{packagingStandardId,jdbcType=INTEGER}, 
+      #{versionNum,jdbcType=VARCHAR}, #{fillingStart,jdbcType=TIMESTAMP}, #{fillingEnd,jdbcType=TIMESTAMP}, 
+      #{maduoProdcount,jdbcType=INTEGER}, #{cleaningType,jdbcType=VARCHAR}, #{needCleanTime,jdbcType=TIMESTAMP}, 
+      #{transferType,jdbcType=VARCHAR}, #{calloffTimestamp,jdbcType=INTEGER}, #{innerResult,jdbcType=VARCHAR}, 
+      #{outerResult,jdbcType=VARCHAR}, #{firstTank,jdbcType=VARCHAR}, #{skipOrderChain,jdbcType=VARCHAR}, 
+      #{outerLossOperation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unilever.hefei.mes.order.model.MspDailyPlan">
+    insert into msp_daily_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="lineNum != null">
+        line_num,
+      </if>
+      <if test="actualProduceOrder != null">
+        actual_produce_order,
+      </if>
+      <if test="autoCleaningStatus != null">
+        auto_cleaning_status,
+      </if>
+      <if test="personCleaningStatus != null">
+        person_cleaning_status,
+      </if>
+      <if test="autoDisinfection != null">
+        auto_disinfection,
+      </if>
+      <if test="personDisinfection != null">
+        person_disinfection,
+      </if>
+      <if test="team != null">
+        team,
+      </if>
+      <if test="productionState != null">
+        production_state,
+      </if>
+      <if test="planDate != null">
+        plan_date,
+      </if>
+      <if test="productionClass != null">
+        production_class,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="planDescribe != null">
+        plan_describe,
+      </if>
+      <if test="actualNumBox != null">
+        actual_num_box,
+      </if>
+      <if test="planProduceStart != null">
+        plan_produce_start,
+      </if>
+      <if test="planProduceEnd != null">
+        plan_produce_end,
+      </if>
+      <if test="pot != null">
+        pot,
+      </if>
+      <if test="materialNum != null">
+        material_num,
+      </if>
+      <if test="materialDescribe != null">
+        material_describe,
+      </if>
+      <if test="materialActualNum != null">
+        material_actual_num,
+      </if>
+      <if test="planStart != null">
+        plan_start,
+      </if>
+      <if test="planEnd != null">
+        plan_end,
+      </if>
+      <if test="actualStart != null">
+        actual_start,
+      </if>
+      <if test="actualEnd != null">
+        actual_end,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="makedate != null">
+        makedate,
+      </if>
+      <if test="maketime != null">
+        maketime,
+      </if>
+      <if test="updatedate != null">
+        updatedate,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="forcedStart != null">
+        forced_start,
+      </if>
+      <if test="forcedStartReason != null">
+        forced_start_reason,
+      </if>
+      <if test="packagingStandardId != null">
+        packaging_standard_id,
+      </if>
+      <if test="versionNum != null">
+        version_num,
+      </if>
+      <if test="fillingStart != null">
+        filling_start,
+      </if>
+      <if test="fillingEnd != null">
+        filling_end,
+      </if>
+      <if test="maduoProdcount != null">
+        maduo_prodcount,
+      </if>
+      <if test="cleaningType != null">
+        cleaning_type,
+      </if>
+      <if test="needCleanTime != null">
+        need_clean_time,
+      </if>
+      <if test="transferType != null">
+        transfer_type,
+      </if>
+      <if test="calloffTimestamp != null">
+        calloff_timestamp,
+      </if>
+      <if test="innerResult != null">
+        inner_result,
+      </if>
+      <if test="outerResult != null">
+        outer_result,
+      </if>
+      <if test="firstTank != null">
+        first_tank,
+      </if>
+      <if test="skipOrderChain != null">
+        skip_order_chain,
+      </if>
+      <if test="outerLossOperation != null">
+        outer_loss_operation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="lineNum != null">
+        #{lineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="actualProduceOrder != null">
+        #{actualProduceOrder,jdbcType=INTEGER},
+      </if>
+      <if test="autoCleaningStatus != null">
+        #{autoCleaningStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="personCleaningStatus != null">
+        #{personCleaningStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="autoDisinfection != null">
+        #{autoDisinfection,jdbcType=VARCHAR},
+      </if>
+      <if test="personDisinfection != null">
+        #{personDisinfection,jdbcType=VARCHAR},
+      </if>
+      <if test="team != null">
+        #{team,jdbcType=VARCHAR},
+      </if>
+      <if test="productionState != null">
+        #{productionState,jdbcType=VARCHAR},
+      </if>
+      <if test="planDate != null">
+        #{planDate,jdbcType=VARCHAR},
+      </if>
+      <if test="productionClass != null">
+        #{productionClass,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="planDescribe != null">
+        #{planDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="actualNumBox != null">
+        #{actualNumBox,jdbcType=VARCHAR},
+      </if>
+      <if test="planProduceStart != null">
+        #{planProduceStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planProduceEnd != null">
+        #{planProduceEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pot != null">
+        #{pot,jdbcType=VARCHAR},
+      </if>
+      <if test="materialNum != null">
+        #{materialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="materialDescribe != null">
+        #{materialDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="materialActualNum != null">
+        #{materialActualNum,jdbcType=VARCHAR},
+      </if>
+      <if test="planStart != null">
+        #{planStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEnd != null">
+        #{planEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualStart != null">
+        #{actualStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualEnd != null">
+        #{actualEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="makedate != null">
+        #{makedate,jdbcType=DATE},
+      </if>
+      <if test="maketime != null">
+        #{maketime,jdbcType=TIME},
+      </if>
+      <if test="updatedate != null">
+        #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIME},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="forcedStart != null">
+        #{forcedStart,jdbcType=INTEGER},
+      </if>
+      <if test="forcedStartReason != null">
+        #{forcedStartReason,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingStandardId != null">
+        #{packagingStandardId,jdbcType=INTEGER},
+      </if>
+      <if test="versionNum != null">
+        #{versionNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fillingStart != null">
+        #{fillingStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fillingEnd != null">
+        #{fillingEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maduoProdcount != null">
+        #{maduoProdcount,jdbcType=INTEGER},
+      </if>
+      <if test="cleaningType != null">
+        #{cleaningType,jdbcType=VARCHAR},
+      </if>
+      <if test="needCleanTime != null">
+        #{needCleanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transferType != null">
+        #{transferType,jdbcType=VARCHAR},
+      </if>
+      <if test="calloffTimestamp != null">
+        #{calloffTimestamp,jdbcType=INTEGER},
+      </if>
+      <if test="innerResult != null">
+        #{innerResult,jdbcType=VARCHAR},
+      </if>
+      <if test="outerResult != null">
+        #{outerResult,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTank != null">
+        #{firstTank,jdbcType=VARCHAR},
+      </if>
+      <if test="skipOrderChain != null">
+        #{skipOrderChain,jdbcType=VARCHAR},
+      </if>
+      <if test="outerLossOperation != null">
+        #{outerLossOperation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unilever.hefei.mes.order.model.MspDailyPlanExample" resultType="java.lang.Long">
+    select count(*) from msp_daily_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update msp_daily_plan
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineNum != null">
+        line_num = #{record.lineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualProduceOrder != null">
+        actual_produce_order = #{record.actualProduceOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.autoCleaningStatus != null">
+        auto_cleaning_status = #{record.autoCleaningStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personCleaningStatus != null">
+        person_cleaning_status = #{record.personCleaningStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autoDisinfection != null">
+        auto_disinfection = #{record.autoDisinfection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personDisinfection != null">
+        person_disinfection = #{record.personDisinfection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.team != null">
+        team = #{record.team,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productionState != null">
+        production_state = #{record.productionState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planDate != null">
+        plan_date = #{record.planDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productionClass != null">
+        production_class = #{record.productionClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planDescribe != null">
+        plan_describe = #{record.planDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualNumBox != null">
+        actual_num_box = #{record.actualNumBox,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planProduceStart != null">
+        plan_produce_start = #{record.planProduceStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.planProduceEnd != null">
+        plan_produce_end = #{record.planProduceEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pot != null">
+        pot = #{record.pot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialNum != null">
+        material_num = #{record.materialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialDescribe != null">
+        material_describe = #{record.materialDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialActualNum != null">
+        material_actual_num = #{record.materialActualNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planStart != null">
+        plan_start = #{record.planStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.planEnd != null">
+        plan_end = #{record.planEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actualStart != null">
+        actual_start = #{record.actualStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actualEnd != null">
+        actual_end = #{record.actualEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null">
+        creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updater != null">
+        updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.makedate != null">
+        makedate = #{record.makedate,jdbcType=DATE},
+      </if>
+      <if test="record.maketime != null">
+        maketime = #{record.maketime,jdbcType=TIME},
+      </if>
+      <if test="record.updatedate != null">
+        updatedate = #{record.updatedate,jdbcType=DATE},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=TIME},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.forcedStart != null">
+        forced_start = #{record.forcedStart,jdbcType=INTEGER},
+      </if>
+      <if test="record.forcedStartReason != null">
+        forced_start_reason = #{record.forcedStartReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packagingStandardId != null">
+        packaging_standard_id = #{record.packagingStandardId,jdbcType=INTEGER},
+      </if>
+      <if test="record.versionNum != null">
+        version_num = #{record.versionNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fillingStart != null">
+        filling_start = #{record.fillingStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fillingEnd != null">
+        filling_end = #{record.fillingEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.maduoProdcount != null">
+        maduo_prodcount = #{record.maduoProdcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.cleaningType != null">
+        cleaning_type = #{record.cleaningType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needCleanTime != null">
+        need_clean_time = #{record.needCleanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.transferType != null">
+        transfer_type = #{record.transferType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calloffTimestamp != null">
+        calloff_timestamp = #{record.calloffTimestamp,jdbcType=INTEGER},
+      </if>
+      <if test="record.innerResult != null">
+        inner_result = #{record.innerResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outerResult != null">
+        outer_result = #{record.outerResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstTank != null">
+        first_tank = #{record.firstTank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skipOrderChain != null">
+        skip_order_chain = #{record.skipOrderChain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outerLossOperation != null">
+        outer_loss_operation = #{record.outerLossOperation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update msp_daily_plan
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      line_num = #{record.lineNum,jdbcType=VARCHAR},
+      actual_produce_order = #{record.actualProduceOrder,jdbcType=INTEGER},
+      auto_cleaning_status = #{record.autoCleaningStatus,jdbcType=VARCHAR},
+      person_cleaning_status = #{record.personCleaningStatus,jdbcType=VARCHAR},
+      auto_disinfection = #{record.autoDisinfection,jdbcType=VARCHAR},
+      person_disinfection = #{record.personDisinfection,jdbcType=VARCHAR},
+      team = #{record.team,jdbcType=VARCHAR},
+      production_state = #{record.productionState,jdbcType=VARCHAR},
+      plan_date = #{record.planDate,jdbcType=VARCHAR},
+      production_class = #{record.productionClass,jdbcType=VARCHAR},
+      project_id = #{record.projectId,jdbcType=VARCHAR},
+      plan_describe = #{record.planDescribe,jdbcType=VARCHAR},
+      actual_num_box = #{record.actualNumBox,jdbcType=VARCHAR},
+      plan_produce_start = #{record.planProduceStart,jdbcType=TIMESTAMP},
+      plan_produce_end = #{record.planProduceEnd,jdbcType=TIMESTAMP},
+      pot = #{record.pot,jdbcType=VARCHAR},
+      material_num = #{record.materialNum,jdbcType=VARCHAR},
+      material_describe = #{record.materialDescribe,jdbcType=VARCHAR},
+      material_actual_num = #{record.materialActualNum,jdbcType=VARCHAR},
+      plan_start = #{record.planStart,jdbcType=TIMESTAMP},
+      plan_end = #{record.planEnd,jdbcType=TIMESTAMP},
+      actual_start = #{record.actualStart,jdbcType=TIMESTAMP},
+      actual_end = #{record.actualEnd,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      updater = #{record.updater,jdbcType=VARCHAR},
+      makedate = #{record.makedate,jdbcType=DATE},
+      maketime = #{record.maketime,jdbcType=TIME},
+      updatedate = #{record.updatedate,jdbcType=DATE},
+      updatetime = #{record.updatetime,jdbcType=TIME},
+      deleted = #{record.deleted,jdbcType=INTEGER},
+      forced_start = #{record.forcedStart,jdbcType=INTEGER},
+      forced_start_reason = #{record.forcedStartReason,jdbcType=VARCHAR},
+      packaging_standard_id = #{record.packagingStandardId,jdbcType=INTEGER},
+      version_num = #{record.versionNum,jdbcType=VARCHAR},
+      filling_start = #{record.fillingStart,jdbcType=TIMESTAMP},
+      filling_end = #{record.fillingEnd,jdbcType=TIMESTAMP},
+      maduo_prodcount = #{record.maduoProdcount,jdbcType=INTEGER},
+      cleaning_type = #{record.cleaningType,jdbcType=VARCHAR},
+      need_clean_time = #{record.needCleanTime,jdbcType=TIMESTAMP},
+      transfer_type = #{record.transferType,jdbcType=VARCHAR},
+      calloff_timestamp = #{record.calloffTimestamp,jdbcType=INTEGER},
+      inner_result = #{record.innerResult,jdbcType=VARCHAR},
+      outer_result = #{record.outerResult,jdbcType=VARCHAR},
+      first_tank = #{record.firstTank,jdbcType=VARCHAR},
+      skip_order_chain = #{record.skipOrderChain,jdbcType=VARCHAR},
+      outer_loss_operation = #{record.outerLossOperation,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unilever.hefei.mes.order.model.MspDailyPlan">
+    update msp_daily_plan
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="lineNum != null">
+        line_num = #{lineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="actualProduceOrder != null">
+        actual_produce_order = #{actualProduceOrder,jdbcType=INTEGER},
+      </if>
+      <if test="autoCleaningStatus != null">
+        auto_cleaning_status = #{autoCleaningStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="personCleaningStatus != null">
+        person_cleaning_status = #{personCleaningStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="autoDisinfection != null">
+        auto_disinfection = #{autoDisinfection,jdbcType=VARCHAR},
+      </if>
+      <if test="personDisinfection != null">
+        person_disinfection = #{personDisinfection,jdbcType=VARCHAR},
+      </if>
+      <if test="team != null">
+        team = #{team,jdbcType=VARCHAR},
+      </if>
+      <if test="productionState != null">
+        production_state = #{productionState,jdbcType=VARCHAR},
+      </if>
+      <if test="planDate != null">
+        plan_date = #{planDate,jdbcType=VARCHAR},
+      </if>
+      <if test="productionClass != null">
+        production_class = #{productionClass,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="planDescribe != null">
+        plan_describe = #{planDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="actualNumBox != null">
+        actual_num_box = #{actualNumBox,jdbcType=VARCHAR},
+      </if>
+      <if test="planProduceStart != null">
+        plan_produce_start = #{planProduceStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planProduceEnd != null">
+        plan_produce_end = #{planProduceEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pot != null">
+        pot = #{pot,jdbcType=VARCHAR},
+      </if>
+      <if test="materialNum != null">
+        material_num = #{materialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="materialDescribe != null">
+        material_describe = #{materialDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="materialActualNum != null">
+        material_actual_num = #{materialActualNum,jdbcType=VARCHAR},
+      </if>
+      <if test="planStart != null">
+        plan_start = #{planStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEnd != null">
+        plan_end = #{planEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualStart != null">
+        actual_start = #{actualStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualEnd != null">
+        actual_end = #{actualEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="makedate != null">
+        makedate = #{makedate,jdbcType=DATE},
+      </if>
+      <if test="maketime != null">
+        maketime = #{maketime,jdbcType=TIME},
+      </if>
+      <if test="updatedate != null">
+        updatedate = #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIME},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="forcedStart != null">
+        forced_start = #{forcedStart,jdbcType=INTEGER},
+      </if>
+      <if test="forcedStartReason != null">
+        forced_start_reason = #{forcedStartReason,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingStandardId != null">
+        packaging_standard_id = #{packagingStandardId,jdbcType=INTEGER},
+      </if>
+      <if test="versionNum != null">
+        version_num = #{versionNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fillingStart != null">
+        filling_start = #{fillingStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fillingEnd != null">
+        filling_end = #{fillingEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maduoProdcount != null">
+        maduo_prodcount = #{maduoProdcount,jdbcType=INTEGER},
+      </if>
+      <if test="cleaningType != null">
+        cleaning_type = #{cleaningType,jdbcType=VARCHAR},
+      </if>
+      <if test="needCleanTime != null">
+        need_clean_time = #{needCleanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transferType != null">
+        transfer_type = #{transferType,jdbcType=VARCHAR},
+      </if>
+      <if test="calloffTimestamp != null">
+        calloff_timestamp = #{calloffTimestamp,jdbcType=INTEGER},
+      </if>
+      <if test="innerResult != null">
+        inner_result = #{innerResult,jdbcType=VARCHAR},
+      </if>
+      <if test="outerResult != null">
+        outer_result = #{outerResult,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTank != null">
+        first_tank = #{firstTank,jdbcType=VARCHAR},
+      </if>
+      <if test="skipOrderChain != null">
+        skip_order_chain = #{skipOrderChain,jdbcType=VARCHAR},
+      </if>
+      <if test="outerLossOperation != null">
+        outer_loss_operation = #{outerLossOperation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unilever.hefei.mes.order.model.MspDailyPlan">
+    update msp_daily_plan
+    set name = #{name,jdbcType=VARCHAR},
+      line_num = #{lineNum,jdbcType=VARCHAR},
+      actual_produce_order = #{actualProduceOrder,jdbcType=INTEGER},
+      auto_cleaning_status = #{autoCleaningStatus,jdbcType=VARCHAR},
+      person_cleaning_status = #{personCleaningStatus,jdbcType=VARCHAR},
+      auto_disinfection = #{autoDisinfection,jdbcType=VARCHAR},
+      person_disinfection = #{personDisinfection,jdbcType=VARCHAR},
+      team = #{team,jdbcType=VARCHAR},
+      production_state = #{productionState,jdbcType=VARCHAR},
+      plan_date = #{planDate,jdbcType=VARCHAR},
+      production_class = #{productionClass,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR},
+      plan_describe = #{planDescribe,jdbcType=VARCHAR},
+      actual_num_box = #{actualNumBox,jdbcType=VARCHAR},
+      plan_produce_start = #{planProduceStart,jdbcType=TIMESTAMP},
+      plan_produce_end = #{planProduceEnd,jdbcType=TIMESTAMP},
+      pot = #{pot,jdbcType=VARCHAR},
+      material_num = #{materialNum,jdbcType=VARCHAR},
+      material_describe = #{materialDescribe,jdbcType=VARCHAR},
+      material_actual_num = #{materialActualNum,jdbcType=VARCHAR},
+      plan_start = #{planStart,jdbcType=TIMESTAMP},
+      plan_end = #{planEnd,jdbcType=TIMESTAMP},
+      actual_start = #{actualStart,jdbcType=TIMESTAMP},
+      actual_end = #{actualEnd,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      makedate = #{makedate,jdbcType=DATE},
+      maketime = #{maketime,jdbcType=TIME},
+      updatedate = #{updatedate,jdbcType=DATE},
+      updatetime = #{updatetime,jdbcType=TIME},
+      deleted = #{deleted,jdbcType=INTEGER},
+      forced_start = #{forcedStart,jdbcType=INTEGER},
+      forced_start_reason = #{forcedStartReason,jdbcType=VARCHAR},
+      packaging_standard_id = #{packagingStandardId,jdbcType=INTEGER},
+      version_num = #{versionNum,jdbcType=VARCHAR},
+      filling_start = #{fillingStart,jdbcType=TIMESTAMP},
+      filling_end = #{fillingEnd,jdbcType=TIMESTAMP},
+      maduo_prodcount = #{maduoProdcount,jdbcType=INTEGER},
+      cleaning_type = #{cleaningType,jdbcType=VARCHAR},
+      need_clean_time = #{needCleanTime,jdbcType=TIMESTAMP},
+      transfer_type = #{transferType,jdbcType=VARCHAR},
+      calloff_timestamp = #{calloffTimestamp,jdbcType=INTEGER},
+      inner_result = #{innerResult,jdbcType=VARCHAR},
+      outer_result = #{outerResult,jdbcType=VARCHAR},
+      first_tank = #{firstTank,jdbcType=VARCHAR},
+      skip_order_chain = #{skipOrderChain,jdbcType=VARCHAR},
+      outer_loss_operation = #{outerLossOperation,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
